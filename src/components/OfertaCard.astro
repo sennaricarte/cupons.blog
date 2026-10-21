@@ -7,10 +7,12 @@ const loja = LOJAS[oferta.loja as keyof typeof LOJAS];
 ---
 <li>
   <article class="card">
-    <span class="tag" style={`background:${loja.cor}`}>{loja.nome}</span>
     {oferta.imagem && (
-      <img src={oferta.imagem} alt={oferta.titulo} width="160" height="160" loading="lazy" decoding="async" referrerpolicy="no-referrer" style="object-fit:contain;align-self:center" />
+      <a class="thumb" href={linkAfiliado(oferta.url, oferta.loja)} rel={REL_AFILIADO} target="_blank" tabindex="-1" aria-hidden="true">
+        <img src={oferta.imagem} alt={oferta.titulo} width="400" height="400" loading="lazy" decoding="async" referrerpolicy="no-referrer" />
+      </a>
     )}
+    <span class="tag" style={`background:${loja.cor}`}>{loja.nome}</span>
     <h3>{oferta.titulo}</h3>
     <p class="preco">
       {oferta.precoAnterior && <s>{brl(oferta.precoAnterior)}</s>}
