@@ -33,4 +33,4 @@ export function diasEntre(aIso: string, bIso: string): number {
 }
 
 export const pctOff = (atual: number, anterior: number) =>
-  Math.round((1 - atual / anterior) * 100);
+  Math.floor((1 - atual / anterior) * 100);
