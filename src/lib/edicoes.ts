@@ -17,8 +17,10 @@ export async function todasEdicoes(): Promise<Edicao[]> {
     .sort((a, b) => b.id.localeCompare(a.id));
 }
 
-export const cupomAtivo = (c: Cupom, hoje = hojeSP()) =>
-  !c.validadeAte || isoDia(c.validadeAte) >= hoje;
+export const cupomAtivo = (c: Cupom, edicaoId: string, hoje = hojeSP()) =>
+  c.validadeAte
+    ? isoDia(c.validadeAte) >= hoje
+    : diasEntre(edicaoId, hoje) <= SITE.cupomSemValidadeDias;
 
 export const ofertaRecente = (e: Edicao, hoje = hojeSP()) =>
   diasEntre(e.id, hoje) <= SITE.ofertaValidadeDias;
@@ -29,7 +31,7 @@ export function itensAtivos(edicoes: Edicao[], loja?: LojaSlug) {
   const ofertas: (Oferta & { edicao: string })[] = [];
   for (const e of edicoes) {
     for (const c of e.data.cupons) {
-      if (cupomAtivo(c, hoje) && (!loja || c.loja === loja)) cupons.push({ ...c, edicao: e.id });
+      if (cupomAtivo(c, e.id, hoje) && (!loja || c.loja === loja)) cupons.push({ ...c, edicao: e.id });
     }
     if (ofertaRecente(e, hoje)) {
       for (const o of e.data.ofertas) {

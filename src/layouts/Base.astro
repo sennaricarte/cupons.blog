@@ -36,6 +36,7 @@ const base = [
 ];
 const graph = { '@context': 'https://schema.org', '@graph': [...base, ...jsonLd] };
 const nav = [
+  { href: '/cupons/', label: 'Cupons' },
   { href: '/curadoria/', label: 'Curadoria do dia' },
   ...LOJA_SLUGS.map((s) => ({ href: `/${s}/`, label: LOJAS[s].nome })),
   { href: '/como-funciona/', label: 'Como funciona' },

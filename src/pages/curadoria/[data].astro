@@ -18,6 +18,7 @@ const { Content } = await render(e);
 const d = e.data;
 const path = `/curadoria/${e.id}/`;
 const antiga = diasEntre(e.id, hojeSP()) > SITE.ofertaValidadeDias;
+const cuponsVisiveis = d.cupons.filter((c) => antiga || cupomAtivo(c, e.id));
 const crumbs = [
   { nome: 'Início', path: '/' },
   { nome: 'Curadoria do dia', path: '/curadoria/' },
@@ -67,11 +68,11 @@ if (d.faq.length) {
   )}
   <div class="prose"><Content /></div>
 
-  {d.cupons.length > 0 && (
+  {cuponsVisiveis.length > 0 && (
     <>
       <h2>Cupons</h2>
       <ul class="grid">
-        {d.cupons.filter((c) => antiga || cupomAtivo(c)).map((c) => <CupomCard cupom={c} />)}
+        {cuponsVisiveis.map((c) => <CupomCard cupom={c} />)}
       </ul>
     </>
   )}

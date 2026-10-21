@@ -11,6 +11,7 @@ export const GET: APIRoute = async () => {
   // Só entram URLs indexáveis (mesmos gates das páginas).
   if (itensAtivos(edicoes).total > 0) urls.push({ loc: '/', lastmod: ultima });
   if (edicoes.length) urls.push({ loc: '/curadoria/', lastmod: ultima });
+  if (itensAtivos(edicoes).cupons.length >= SITE.minItensHub) urls.push({ loc: '/cupons/', lastmod: ultima });
   for (const s of LOJA_SLUGS) {
     if (itensAtivos(edicoes, s).total >= SITE.minItensHub) urls.push({ loc: `/${s}/`, lastmod: ultima });
   }

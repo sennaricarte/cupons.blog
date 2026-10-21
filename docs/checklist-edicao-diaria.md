@@ -7,11 +7,12 @@ Tempo-alvo: 15 a 30 minutos. Regra de ouro: **só publique o que você viu na p�
 |---|---|---|
 | Título completo | Página do anúncio | Nunca use título cortado com "..." |
 | Preço atual | Página do anúncio | Se exigir Pix ou cupom, escreva isso na observação |
-| Preço anterior ("de") | Página do anúncio | Só se a loja mostrar. Se o % da loja divergir da conta, omita e cite o % no texto |
+| Preço anterior ("de") | Página do anúncio | Só se a loja mostrar. O site calcula o % truncado, igual ao Mercado Livre; se ainda divergir, omita e cite o % no texto |
 | Link de afiliado | Botão **Compartilhar** (ML) / SiteStripe (Amazon) / gerador da Shopee | Link curto da própria plataforma |
 | Imagem | Botão direito na foto → **Copiar endereço da imagem** | Só Mercado Livre por enquanto |
 | Categoria | Sua escolha | Curta e genérica (ex.: Casa e lavanderia) |
-| Cupom (se houver) | Página da campanha | Código exato, condições e validade que a loja informa |
+| Cupom (se houver) | Página da campanha | Código exato (se houver), compra mínima, limite e validade que a loja informa |
+| Validade do cupom | Página do cupom | Sem `validadeAte`, o cupom some do site 1 dia depois da edição (`cupomSemValidadeDias`) |
 
 ## 2. Não publicar
 - % **Ganhos** / comissão: é dado interno.

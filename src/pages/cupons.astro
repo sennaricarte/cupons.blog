@@ -1,0 +1,40 @@
+---
+import Base from '../layouts/Base.astro';
+import Crumbs from '../components/Crumbs.astro';
+import CupomCard from '../components/CupomCard.astro';
+import { SITE, LOJAS, LOJA_SLUGS } from '../data/site';
+import { todasEdicoes, itensAtivos } from '../lib/edicoes';
+import { crumbsLd, itemListLd } from '../lib/schema';
+
+const { cupons } = itensAtivos(await todasEdicoes());
+const porLoja = LOJA_SLUGS.map((s) => ({ slug: s, loja: LOJAS[s], itens: cupons.filter((c) => c.loja === s) })).filter(
+  (g) => g.itens.length > 0,
+);
+const crumbs = [{ nome: 'Início', path: '/' }, { nome: 'Cupons do dia' }];
+// Gate anti-thin content: só indexa com cupons ativos suficientes.
+const noindex = cupons.length < SITE.minItensHub;
+---
+<Base
+  title="Cupons de desconto hoje: Mercado Livre, Amazon e Shopee"
+  description="Cupons de desconto ativos hoje no Mercado Livre, Amazon e Shopee, com condições, limite e data da última verificação."
+  path="/cupons/"
+  noindex={noindex}
+  jsonLd={[crumbsLd(crumbs), ...(cupons.length ? [itemListLd('Cupons ativos hoje', cupons.map((c) => ({ nome: c.titulo })), '/cupons/')] : [])]}
+>
+  <Crumbs items={[{ nome: 'Início', href: '/' }, { nome: 'Cupons do dia' }]} />
+  <h1>Cupons de desconto hoje</h1>
+  <p class="lede">
+    Só cupons que conferimos na página da loja. Cada um mostra as condições e a data da verificação.
+    Cupons mudam e esgotam rápido: confirme as regras antes de comprar.
+  </p>
+  {cupons.length === 0 ? (
+    <p class="vazio">Nenhum cupom ativo agora. Veja as <a href="/curadoria/">ofertas da curadoria do dia</a>.</p>
+  ) : (
+    porLoja.map((g) => (
+      <>
+        <h2>Cupons {g.loja.nome}</h2>
+        <ul class="grid">{g.itens.map((c) => <CupomCard cupom={c} />)}</ul>
+      </>
+    ))
+  )}
+</Base>
