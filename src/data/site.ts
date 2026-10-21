@@ -18,6 +18,8 @@ export const SITE = {
   arquivoIndexavelDias: 14,
   // Mínimo de itens ativos para uma página de loja ser indexável (gate anti-thin content).
   minItensHub: 3,
+  // /cupons/ é página evergreen: indexa com 1+ cupom ativo (evita liga/desliga do noindex quando cupons vencem).
+  minCuponsPagina: 1,
 } as const;
 
 export type LojaSlug = 'mercado-livre' | 'amazon' | 'shopee';

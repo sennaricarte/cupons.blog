@@ -11,8 +11,8 @@ const porLoja = LOJA_SLUGS.map((s) => ({ slug: s, loja: LOJAS[s], itens: cupons.
   (g) => g.itens.length > 0,
 );
 const crumbs = [{ nome: 'Início', path: '/' }, { nome: 'Cupons do dia' }];
-// Gate anti-thin content: só indexa com cupons ativos suficientes.
-const noindex = cupons.length < SITE.minItensHub;
+// Gate: só indexa com cupom ativo (página vazia fica noindex).
+const noindex = cupons.length < SITE.minCuponsPagina;
 ---
 <Base
   title="Cupons de desconto hoje: Mercado Livre, Amazon e Shopee"
