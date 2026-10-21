@@ -1,0 +1,33 @@
+---
+import Base from '../../layouts/Base.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import { todasEdicoes, edicaoIndexavel } from '../../lib/edicoes';
+import { dataLonga } from '../../lib/format';
+import { crumbsLd } from '../../lib/schema';
+
+const edicoes = await todasEdicoes();
+const crumbs = [{ nome: 'Início', path: '/' }, { nome: 'Curadoria do dia' }];
+---
+<Base
+  title="Curadoria diária de cupons e promoções"
+  description="Arquivo da curadoria diária: cupons de desconto e produtos em promoção do Mercado Livre, Amazon e Shopee."
+  path="/curadoria/"
+  noindex={edicoes.length === 0}
+  jsonLd={[crumbsLd(crumbs)]}
+>
+  <Crumbs items={[{ nome: 'Início', href: '/' }, { nome: 'Curadoria do dia' }]} />
+  <h1>Curadoria diária</h1>
+  <p class="lede">Uma edição por dia, com os cupons e as ofertas que passaram pela nossa checagem.</p>
+  {edicoes.length === 0 ? (
+    <p class="vazio">Nenhuma edição publicada ainda.</p>
+  ) : (
+    <ul class="prose" style="padding-left:1.1em">
+      {edicoes.map((e) => (
+        <li>
+          <a href={`/curadoria/${e.id}/`}>{e.data.titulo}</a>
+          <span class="meta"> · {dataLonga(e.id)} · {e.data.cupons.length} cupons, {e.data.ofertas.length} ofertas{!edicaoIndexavel(e) && ' · arquivo'}</span>
+        </li>
+      ))}
+    </ul>
+  )}
+</Base>

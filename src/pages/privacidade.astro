@@ -1,0 +1,13 @@
+---
+import Base from '../layouts/Base.astro';
+import Crumbs from '../components/Crumbs.astro';
+import { SITE } from '../data/site';
+
+---
+<Base title="Política de privacidade" description="Como o Cupons.blog trata dados de navegação, cookies e links de afiliado." path="/privacidade/" noindex={true}>
+  <Crumbs items={[{ nome: 'Início', href: '/' }, { nome: 'Política de privacidade' }]} />
+  <h1>Política de privacidade</h1>
+  <div class="prose">
+    <p><strong>[CONFIRMAR]</strong> Esta página aguarda revisão final antes de ser indexada. Defina quais ferramentas de análise e anúncios o site usará (GA4, AdSense) e descreva cookies e base legal (LGPD).</p>
+  </div>
+</Base>

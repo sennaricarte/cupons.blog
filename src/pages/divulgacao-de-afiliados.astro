@@ -1,0 +1,20 @@
+---
+import Base from '../layouts/Base.astro';
+import Crumbs from '../components/Crumbs.astro';
+import { SITE } from '../data/site';
+
+---
+<Base title="Divulgação de afiliados" description="Transparência sobre os links de afiliado do Cupons.blog: Amazon, Mercado Livre e Shopee, e como isso afeta a curadoria." path="/divulgacao-de-afiliados/" noindex={false}>
+  <Crumbs items={[{ nome: 'Início', href: '/' }, { nome: 'Divulgação de afiliados' }]} />
+  <h1>Divulgação de afiliados</h1>
+  <div class="prose">
+    <p>O Cupons.blog participa de programas de afiliados. Quando você compra por um link nosso, podemos receber uma comissão. Você não paga nada a mais.</p>
+    <ul>
+      <li><strong>Amazon:</strong> como Associado da Amazon, ganhamos com compras qualificadas.</li>
+      <li><strong>Mercado Livre:</strong> participamos do programa de afiliados do Mercado Livre.</li>
+      <li><strong>Shopee:</strong> participamos do programa de afiliados da Shopee.</li>
+    </ul>
+    <p>Todos os links comerciais usam o atributo <code>rel="sponsored"</code>. A comissão não altera preços nem cupons exibidos.</p>
+    <p>Preços e cupons mudam. Sempre confirme o valor final na loja antes de comprar.</p>
+  </div>
+</Base>

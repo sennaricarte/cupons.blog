@@ -1,0 +1,28 @@
+---
+import Base from '../layouts/Base.astro';
+import Crumbs from '../components/Crumbs.astro';
+import { SITE } from '../data/site';
+
+---
+<Base title="Como funciona a curadoria" description="Como o Cupons.blog seleciona, confere e atualiza cupons e ofertas do Mercado Livre, Amazon e Shopee todos os dias." path="/como-funciona/" noindex={false}>
+  <Crumbs items={[{ nome: 'Início', href: '/' }, { nome: 'Como funciona a curadoria' }]} />
+  <h1>Como funciona a curadoria</h1>
+  <div class="prose">
+    <p>O Cupons.blog publica uma curadoria por dia. Cada cupom e cada oferta é conferido na página da loja antes de entrar no ar.</p>
+    <h2>O que conferimos</h2>
+    <ul>
+      <li>O cupom ou o preço existe na página da loja no momento da publicação.</li>
+      <li>Mostramos a data da verificação em cada item.</li>
+      <li>Informamos validade e condições quando a loja divulga.</li>
+      <li>Cupons vencidos saem das páginas automaticamente.</li>
+    </ul>
+    <h2>O que não fazemos</h2>
+    <ul>
+      <li>Não inventamos preço, desconto, código ou prazo.</li>
+      <li>Não garantimos estoque: ele muda a qualquer momento.</li>
+      <li>Não vendemos nada. A compra acontece na loja.</li>
+    </ul>
+    <h2>Como ganhamos dinheiro</h2>
+    <p>Usamos links de afiliado. Se você comprar, a loja paga uma comissão ao site. O preço para você não muda. Veja a <a href="/divulgacao-de-afiliados/">divulgação completa</a>.</p>
+  </div>
+</Base>

@@ -1,0 +1,34 @@
+---
+import Base from '../layouts/Base.astro';
+import Crumbs from '../components/Crumbs.astro';
+import CupomCard from '../components/CupomCard.astro';
+import OfertaCard from '../components/OfertaCard.astro';
+import { SITE, LOJAS, LOJA_SLUGS, type LojaSlug } from '../data/site';
+import { todasEdicoes, itensAtivos } from '../lib/edicoes';
+import { crumbsLd, itemListLd } from '../lib/schema';
+
+export function getStaticPaths() {
+  return LOJA_SLUGS.map((s) => ({ params: { loja: s }, props: { slug: s as LojaSlug } }));
+}
+const { slug } = Astro.props;
+const loja = LOJAS[slug];
+const { cupons, ofertas, total } = itensAtivos(await todasEdicoes(), slug);
+const path = `/${slug}/`;
+const crumbs = [{ nome: 'Início', path: '/' }, { nome: loja.nome }];
+// Gate anti-thin content: só indexa com itens ativos suficientes.
+const noindex = total < SITE.minItensHub;
+---
+<Base
+  title={`Cupons ${loja.nome} hoje e ofertas em promoção`}
+  description={`${loja.descricao} Cupons de desconto e produtos em promoção do ${loja.nome}, atualizados na curadoria diária.`}
+  path={path}
+  noindex={noindex}
+  jsonLd={[crumbsLd(crumbs), ...(total ? [itemListLd(`Cupons e ofertas ${loja.nome}`, [...cupons, ...ofertas].map((i) => ({ nome: i.titulo })), path)] : [])]}
+>
+  <Crumbs items={[{ nome: 'Início', href: '/' }, { nome: loja.nome }]} />
+  <h1>Cupons {loja.nome} hoje</h1>
+  <p class="lede">{loja.descricao}</p>
+  {total === 0 && <p class="vazio">Sem cupons ou ofertas ativos do {loja.nome} neste momento. Confira a <a href="/curadoria/">curadoria do dia</a>.</p>}
+  {cupons.length > 0 && (<><h2>Cupons ativos</h2><ul class="grid">{cupons.map((c) => <CupomCard cupom={c} />)}</ul></>)}
+  {ofertas.length > 0 && (<><h2>Produtos em promoção</h2><ul class="grid">{ofertas.map((o) => <OfertaCard oferta={o} />)}</ul></>)}
+</Base>

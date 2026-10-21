@@ -1,0 +1,13 @@
+---
+import Base from '../layouts/Base.astro';
+import Crumbs from '../components/Crumbs.astro';
+import { SITE } from '../data/site';
+
+---
+<Base title="Contato" description="Fale com a equipe do Cupons.blog." path="/contato/" noindex={SITE.contactEmail === null}>
+  <Crumbs items={[{ nome: 'Início', href: '/' }, { nome: 'Contato' }]} />
+  <h1>Contato</h1>
+  <div class="prose">
+    {SITE.contactEmail ? <p>E-mail: <a href={`mailto:${SITE.contactEmail}`}>{SITE.contactEmail}</a></p> : <p><strong>[CONFIRMAR]</strong> Defina o e-mail público em <code>src/data/site.ts</code>.</p>}
+  </div>
+</Base>

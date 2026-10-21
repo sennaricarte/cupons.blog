@@ -1,0 +1,61 @@
+---
+import Base from '../layouts/Base.astro';
+import CupomCard from '../components/CupomCard.astro';
+import OfertaCard from '../components/OfertaCard.astro';
+import { SITE, LOJAS, LOJA_SLUGS } from '../data/site';
+import { todasEdicoes, itensAtivos } from '../lib/edicoes';
+import { dataLonga } from '../lib/format';
+import { itemListLd } from '../lib/schema';
+
+const edicoes = await todasEdicoes();
+const hoje = edicoes[0];
+const { cupons, ofertas, total } = itensAtivos(edicoes);
+const destaqueCupons = cupons.slice(0, 6);
+const destaqueOfertas = ofertas.slice(0, 6);
+const ld = total
+  ? [itemListLd('Cupons e ofertas em destaque', [...destaqueCupons, ...destaqueOfertas].map((i) => ({ nome: i.titulo })), '/')]
+  : [];
+---
+<Base
+  title={SITE.tagline}
+  description={SITE.description}
+  path="/"
+  noindex={total === 0}
+  jsonLd={ld}
+>
+  <h1>Cupons e promoções verificados, todos os dias</h1>
+  <p class="lede">
+    Selecionamos à mão os melhores cupons e ofertas do Mercado Livre, da Amazon e da Shopee. Nada de lista
+    gigante e vencida: só o que vale a pena hoje.
+  </p>
+  <ul class="chips" aria-label="Lojas">
+    {LOJA_SLUGS.map((s) => <li><a href={`/${s}/`}>{LOJAS[s].nome}</a></li>)}
+    <li><a href="/curadoria/">Curadorias anteriores</a></li>
+  </ul>
+
+  {total === 0 ? (
+    <p class="vazio" style="margin-top:28px">
+      A primeira curadoria diária está sendo preparada. Volte em breve ou assine o <a href="/rss.xml">RSS</a>.
+    </p>
+  ) : (
+    <>
+      {hoje && (
+        <p class="meta" style="margin-top:20px">
+          Última curadoria: <a href={`/curadoria/${hoje.id}/`}>{dataLonga(hoje.id)}</a>
+        </p>
+      )}
+      {destaqueCupons.length > 0 && (
+        <>
+          <h2>Cupons ativos agora</h2>
+          <ul class="grid">{destaqueCupons.map((c) => <CupomCard cupom={c} />)}</ul>
+        </>
+      )}
+      {destaqueOfertas.length > 0 && (
+        <>
+          <h2>Produtos em promoção</h2>
+          <ul class="grid">{destaqueOfertas.map((o) => <OfertaCard oferta={o} />)}</ul>
+        </>
+      )}
+    </>
+  )}
+</Base>

@@ -1,0 +1,23 @@
+---
+import { LOJAS } from '../data/site';
+import { linkAfiliado, REL_AFILIADO } from '../lib/links';
+import { dataCurta, isoDia } from '../lib/format';
+const { cupom } = Astro.props;
+const loja = LOJAS[cupom.loja as keyof typeof LOJAS];
+---
+<li>
+  <article class="card">
+    <span class="tag" style={`background:${loja.cor}`}>{loja.nome}</span>
+    <h3>{cupom.titulo}</h3>
+    <p style="margin:0"><strong>{cupom.desconto}</strong></p>
+    {cupom.codigo && <div class="codigo" aria-label="Código do cupom">{cupom.codigo}</div>}
+    {cupom.condicoes && <p class="meta">{cupom.condicoes}</p>}
+    <p class="meta">
+      Verificado em {dataCurta(isoDia(cupom.verificadoEm))}
+      {cupom.validadeAte && <> · válido até {dataCurta(isoDia(cupom.validadeAte))}</>}
+    </p>
+    <a class="btn" href={linkAfiliado(cupom.url, cupom.loja)} rel={REL_AFILIADO} target="_blank">
+      {cupom.codigo ? 'Ir à loja e usar o cupom' : 'Ativar cupom na loja'}
+    </a>
+  </article>
+</li>

@@ -1,0 +1,90 @@
+---
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import CupomCard from '../../components/CupomCard.astro';
+import OfertaCard from '../../components/OfertaCard.astro';
+import { SITE } from '../../data/site';
+import { todasEdicoes, edicaoIndexavel, cupomAtivo } from '../../lib/edicoes';
+import { dataLonga, isoDia, hojeSP, diasEntre } from '../../lib/format';
+import { crumbsLd, itemListLd } from '../../lib/schema';
+
+export async function getStaticPaths() {
+  const edicoes = await todasEdicoes();
+  return edicoes.map((e) => ({ params: { data: e.id }, props: { e } }));
+}
+const { e } = Astro.props;
+const { Content } = await render(e);
+const d = e.data;
+const path = `/curadoria/${e.id}/`;
+const antiga = diasEntre(e.id, hojeSP()) > SITE.ofertaValidadeDias;
+const crumbs = [
+  { nome: 'Início', path: '/' },
+  { nome: 'Curadoria do dia', path: '/curadoria/' },
+  { nome: dataLonga(e.id) },
+];
+const ld: Record<string, unknown>[] = [
+  crumbsLd(crumbs),
+  {
+    '@type': 'Article',
+    headline: d.titulo,
+    description: d.resumo,
+    inLanguage: SITE.locale,
+    datePublished: isoDia(d.publicadoEm),
+    dateModified: isoDia(d.atualizadoEm ?? d.publicadoEm),
+    mainEntityOfPage: new URL(path, SITE.url).toString(),
+    author: { '@id': `${SITE.url}/#org` },
+    publisher: { '@id': `${SITE.url}/#org` },
+  },
+  itemListLd('Itens da curadoria', [...d.cupons, ...d.ofertas].map((i) => ({ nome: i.titulo })), path),
+];
+if (d.faq.length) {
+  ld.push({
+    '@type': 'FAQPage',
+    mainEntity: d.faq.map((f) => ({
+      '@type': 'Question',
+      name: f.pergunta,
+      acceptedAnswer: { '@type': 'Answer', text: f.resposta },
+    })),
+  });
+}
+---
+<Base
+  title={d.titulo}
+  description={d.resumo}
+  path={path}
+  ogType="article"
+  noindex={!edicaoIndexavel(e)}
+  published={isoDia(d.publicadoEm)}
+  modified={isoDia(d.atualizadoEm ?? d.publicadoEm)}
+  jsonLd={ld}
+>
+  <Crumbs items={[{ nome: 'Início', href: '/' }, { nome: 'Curadoria do dia', href: '/curadoria/' }, { nome: dataLonga(e.id) }]} />
+  <h1>{d.titulo}</h1>
+  <p class="lede">{d.resumo}</p>
+  {antiga && (
+    <p class="vazio">Esta edição é de {dataLonga(e.id)}. Preços e cupons podem ter expirado. <a href="/curadoria/">Veja a curadoria mais recente</a>.</p>
+  )}
+  <div class="prose"><Content /></div>
+
+  {d.cupons.length > 0 && (
+    <>
+      <h2>Cupons</h2>
+      <ul class="grid">
+        {d.cupons.filter((c) => antiga || cupomAtivo(c)).map((c) => <CupomCard cupom={c} />)}
+      </ul>
+    </>
+  )}
+  {d.ofertas.length > 0 && (
+    <>
+      <h2>Produtos em promoção</h2>
+      <ul class="grid">{d.ofertas.map((o) => <OfertaCard oferta={o} />)}</ul>
+    </>
+  )}
+  {d.faq.length > 0 && (
+    <>
+      <h2>Perguntas frequentes</h2>
+      {d.faq.map((f) => <details><summary>{f.pergunta}</summary><p>{f.resposta}</p></details>)}
+    </>
+  )}
+</Base>

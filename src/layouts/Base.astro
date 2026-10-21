@@ -1,0 +1,103 @@
+---
+import '../styles/global.css';
+import { SITE, LOJAS, LOJA_SLUGS } from '../data/site';
+
+interface Props {
+  title: string;
+  description: string;
+  path: string; // ex.: "/amazon/" (sempre com barra final)
+  noindex?: boolean;
+  ogType?: 'website' | 'article';
+  jsonLd?: Record<string, unknown>[];
+  published?: string;
+  modified?: string;
+}
+const { title, description, path, noindex = false, ogType = 'website', jsonLd = [], published, modified } =
+  Astro.props;
+
+const canonical = new URL(path, SITE.url).toString();
+const fullTitle = path === '/' ? `${SITE.name} — ${SITE.tagline}` : `${title} | ${SITE.name}`;
+
+const base = [
+  {
+    '@type': 'Organization',
+    '@id': `${SITE.url}/#org`,
+    name: SITE.name,
+    url: SITE.url,
+  },
+  {
+    '@type': 'WebSite',
+    '@id': `${SITE.url}/#site`,
+    url: SITE.url,
+    name: SITE.name,
+    inLanguage: SITE.locale,
+    publisher: { '@id': `${SITE.url}/#org` },
+  },
+];
+const graph = { '@context': 'https://schema.org', '@graph': [...base, ...jsonLd] };
+const nav = [
+  { href: '/curadoria/', label: 'Curadoria do dia' },
+  ...LOJA_SLUGS.map((s) => ({ href: `/${s}/`, label: LOJAS[s].nome })),
+  { href: '/como-funciona/', label: 'Como funciona' },
+];
+---
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="robots" content={noindex ? 'noindex,follow' : 'index,follow,max-image-preview:large,max-snippet:-1'} />
+    <meta name="theme-color" content="#0b6b4f" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="alternate" type="application/rss+xml" title={`${SITE.name} — RSS`} href="/rss.xml" />
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta name="twitter:card" content="summary" />
+    {published && <meta property="article:published_time" content={published} />}
+    {modified && <meta property="article:modified_time" content={modified} />}
+    <script type="application/ld+json" set:html={JSON.stringify(graph)} />
+  </head>
+  <body>
+    <a class="skip" href="#conteudo">Pular para o conteúdo</a>
+    <div class="aviso">
+      <div class="wrap">
+        <strong>Transparência:</strong> ganhamos comissão quando você compra pelos nossos links, sem custo extra para você.
+        <a href="/divulgacao-de-afiliados/">Saiba mais</a>.
+      </div>
+    </div>
+    <header class="site">
+      <div class="wrap">
+        <a class="logo" href="/">cupons<span>.blog</span></a>
+        <nav class="main" aria-label="Principal">
+          {nav.map((n) => (
+            <a href={n.href} aria-current={Astro.url.pathname === n.href ? 'page' : undefined}>{n.label}</a>
+          ))}
+        </nav>
+      </div>
+    </header>
+    <main id="conteudo"><div class="wrap"><slot /></div></main>
+    <footer class="site">
+      <div class="wrap">
+        <p>
+          Como Associado da Amazon, ganhamos com compras qualificadas. Também participamos de programas de afiliados do
+          Mercado Livre e da Shopee. Preços, cupons e estoque mudam a qualquer momento: confirme na página da loja antes de comprar.
+        </p>
+        <nav aria-label="Rodapé">
+          <a href="/como-funciona/">Como funciona a curadoria</a>
+          <a href="/divulgacao-de-afiliados/">Divulgação de afiliados</a>
+          <a href="/privacidade/">Privacidade</a>
+          <a href="/contato/">Contato</a>
+          <a href="/rss.xml">RSS</a>
+        </nav>
+        <p>© {new Date().getFullYear()} {SITE.name}. Não somos afiliados oficiais das marcas citadas além dos programas de afiliados acima.</p>
+      </div>
+    </footer>
+  </body>
+</html>

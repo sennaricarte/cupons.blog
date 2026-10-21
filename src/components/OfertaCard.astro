@@ -1,0 +1,24 @@
+---
+import { LOJAS } from '../data/site';
+import { linkAfiliado, REL_AFILIADO } from '../lib/links';
+import { brl, dataCurta, isoDia, pctOff } from '../lib/format';
+const { oferta } = Astro.props;
+const loja = LOJAS[oferta.loja as keyof typeof LOJAS];
+---
+<li>
+  <article class="card">
+    <span class="tag" style={`background:${loja.cor}`}>{loja.nome}</span>
+    {oferta.imagem && (
+      <img src={oferta.imagem} alt={oferta.titulo} width="160" height="160" loading="lazy" decoding="async" referrerpolicy="no-referrer" style="object-fit:contain;align-self:center" />
+    )}
+    <h3>{oferta.titulo}</h3>
+    <p class="preco">
+      {oferta.precoAnterior && <s>{brl(oferta.precoAnterior)}</s>}
+      {brl(oferta.precoAtual)}
+      {oferta.precoAnterior && <span class="off">−{pctOff(oferta.precoAtual, oferta.precoAnterior)}%</span>}
+    </p>
+    {oferta.observacao && <p class="meta">{oferta.observacao}</p>}
+    <p class="meta">Preço visto em {dataCurta(isoDia(oferta.verificadoEm))}. Pode mudar sem aviso.</p>
+    <a class="btn" href={linkAfiliado(oferta.url, oferta.loja)} rel={REL_AFILIADO} target="_blank">Ver na {loja.nome}</a>
+  </article>
+</li>

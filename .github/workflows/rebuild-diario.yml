@@ -1,0 +1,17 @@
+# Rebuild diário: expira cupons vencidos e remove edições antigas do sitemap, mesmo sem commit novo.
+# Requer o secret VERCEL_DEPLOY_HOOK_URL (Vercel → Settings → Git → Deploy Hooks).
+name: rebuild-diario
+on:
+  schedule:
+    - cron: '5 3 * * *'   # 00:05 em São Paulo (UTC-3)
+  workflow_dispatch:
+jobs:
+  deploy-hook:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Disparar deploy
+        env:
+          HOOK: ${{ secrets.VERCEL_DEPLOY_HOOK_URL }}
+        run: |
+          test -n "$HOOK" || { echo "Secret VERCEL_DEPLOY_HOOK_URL ausente"; exit 1; }
+          curl -fsS -X POST "$HOOK"
