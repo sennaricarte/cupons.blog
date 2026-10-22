@@ -1,6 +1,6 @@
 import { SITE } from '../data/site';
 
-/** Amazon: garante a tag de afiliado em links amazon.com.br completos. amzn.to já embute a tag. */
+/** Amazon: garante a tag de afiliado em links amazon.com.br completos. amzn.to e link.amazon já embutem a tag. */
 export function linkAfiliado(url: string, loja: string): string {
   if (loja !== 'amazon') return url;
   const u = new URL(url);

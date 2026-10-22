@@ -36,7 +36,7 @@ export const LOJAS: Record<
   },
   amazon: {
     nome: 'Amazon',
-    hosts: ['amazon.com.br', 'amzn.to'],
+    hosts: ['amazon.com.br', 'amzn.to', 'link.amazon'],
     cor: '#c45500',
     descricao: 'Cupons e ofertas da Amazon Brasil selecionados hoje.',
   },
