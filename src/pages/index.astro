@@ -12,7 +12,7 @@ const edicoes = await todasEdicoes();
 const hoje = edicoes[0];
 const { cupons, ofertas, total } = itensAtivos(edicoes);
 const destaqueCupons = cupons.slice(0, 6);
-const destaqueOfertas = ofertas.slice(0, 6);
+const destaqueOfertas = ofertas;
 const ld = total
   ? [itemListLd('Cupons e ofertas em destaque', [...destaqueCupons, ...destaqueOfertas].map((i) => ({ nome: i.titulo })), '/')]
   : [];
