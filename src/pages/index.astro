@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import CupomCard from '../components/CupomCard.astro';
 import OfertaCard from '../components/OfertaCard.astro';
+import WhatsappDestaque from '../components/WhatsappDestaque.astro';
 import { SITE, LOJAS, LOJA_SLUGS } from '../data/site';
 import { todasEdicoes, itensAtivos } from '../lib/edicoes';
 import { dataLonga } from '../lib/format';
@@ -33,6 +34,8 @@ const ld = total
     {LOJA_SLUGS.map((s) => <li><a href={`/${s}/`}>{LOJAS[s].nome}</a></li>)}
     <li><a href="/curadoria/">Curadorias anteriores</a></li>
   </ul>
+
+  <WhatsappDestaque />
 
   {total === 0 ? (
     <p class="vazio" style="margin-top:28px">

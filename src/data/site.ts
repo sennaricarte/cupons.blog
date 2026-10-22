@@ -20,6 +20,8 @@ export const SITE = {
   minItensHub: 3,
   // /cupons/ é página evergreen: indexa com 1+ cupom ativo (evita liga/desliga do noindex quando cupons vencem).
   minCuponsPagina: 1,
+  whatsappGrupo: 'https://chat.whatsapp.com/J7GTPjzdldFAeCkd8cZQSE?s=cl&p=i&mlu=4&ilr=4',
+  instagram: 'https://www.instagram.com/achadinhos.cupons.blog?srtk=cXA3aHdndGhkNmUz',
 } as const;
 
 export type LojaSlug = 'mercado-livre' | 'amazon' | 'shopee';
