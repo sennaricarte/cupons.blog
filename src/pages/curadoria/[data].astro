@@ -51,7 +51,7 @@ if (d.faq.length) {
 }
 ---
 <Base
-  title={d.titulo}
+  title={d.tituloSeo ?? d.titulo}
   description={d.resumo}
   path={path}
   ogType="article"
@@ -79,7 +79,7 @@ if (d.faq.length) {
   {d.ofertas.length > 0 && (
     <>
       <h2>Produtos em promoção</h2>
-      <ul class="grid">{d.ofertas.map((o) => <OfertaCard oferta={o} />)}</ul>
+      <ul class="grid">{d.ofertas.map((o, i) => <OfertaCard oferta={o} eager={cuponsVisiveis.length === 0 && i < 2} />)}</ul>
     </>
   )}
   {d.faq.length > 0 && (

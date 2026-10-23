@@ -10,6 +10,7 @@ Tempo-alvo: 15 a 30 minutos. Regra de ouro: **só publique o que você viu na p�
 | Preço anterior ("de") | Página do anúncio | Só se a loja mostrar. O site calcula o % truncado, igual ao Mercado Livre; se ainda divergir, omita e cite o % no texto |
 | Link de afiliado | Botão **Compartilhar** (ML) / SiteStripe (Amazon) / gerador da Shopee | Link curto da própria plataforma |
 | Imagem | Mercado Livre: botão direito na foto → **Copiar endereço da imagem**. Amazon: prefira o SiteStripe (**Imagem**) | Sempre só o link da imagem, nunca baixar ou hospedar |
+| Título para o Google | Sua escolha | `tituloSeo`, até 60 caracteres, com a data e o destaque do dia. O build recusa mais que isso |
 | Categoria | Sua escolha | Curta e genérica (ex.: Casa e lavanderia) |
 | Cupom (se houver) | Página da campanha | Código exato (se houver), compra mínima, limite e validade que a loja informa |
 | Validade do cupom | Página do cupom | Sem `validadeAte`, o cupom some do site 1 dia depois da edição (`cupomSemValidadeDias`) |

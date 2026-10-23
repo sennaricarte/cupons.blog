@@ -16,7 +16,10 @@ const { title, description, path, noindex = false, ogType = 'website', jsonLd = 
   Astro.props;
 
 const canonical = new URL(path, SITE.url).toString();
-const fullTitle = path === '/' ? `${SITE.name} — ${SITE.tagline}` : `${title} | ${SITE.name}`;
+// Título do Google: até ~60 caracteres. Se o sufixo estourar, ele sai (o nome do site segue em og:site_name).
+const comSufixo = `${title} | ${SITE.name}`;
+const fullTitle = path === '/' ? `${SITE.name} — ${SITE.tagline}` : comSufixo.length <= 60 ? comSufixo : title;
+const ogImage = new URL('/og-default.png', SITE.url).toString();
 
 const base = [
   {
@@ -60,7 +63,12 @@ const nav = [
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    <meta name="twitter:card" content="summary" />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={`${SITE.name}: ${SITE.tagline}`} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content={ogImage} />
     {published && <meta property="article:published_time" content={published} />}
     {modified && <meta property="article:modified_time" content={modified} />}
     <script type="application/ld+json" set:html={JSON.stringify(graph)} />

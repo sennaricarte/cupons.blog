@@ -2,14 +2,14 @@
 import { LOJAS } from '../data/site';
 import { linkAfiliado, REL_AFILIADO } from '../lib/links';
 import { brl, dataCurta, isoDia, pctOff } from '../lib/format';
-const { oferta } = Astro.props;
+const { oferta, eager = false } = Astro.props;
 const loja = LOJAS[oferta.loja as keyof typeof LOJAS];
 ---
 <li>
   <article class="card">
     {oferta.imagem && (
       <a class="thumb" href={linkAfiliado(oferta.url, oferta.loja)} rel={REL_AFILIADO} target="_blank" tabindex="-1" aria-hidden="true">
-        <img src={oferta.imagem} alt={oferta.titulo} width="400" height="400" loading="lazy" decoding="async" referrerpolicy="no-referrer" />
+        <img src={oferta.imagem} alt={oferta.titulo} width="400" height="400" loading={eager ? 'eager' : 'lazy'} fetchpriority={eager ? 'high' : undefined} decoding="async" referrerpolicy="no-referrer" />
       </a>
     )}
     <span class="tag" style={`background:${loja.cor}`}>{loja.nome}</span>

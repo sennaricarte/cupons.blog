@@ -30,5 +30,5 @@ const noindex = total < SITE.minItensHub;
   <p class="lede">{loja.descricao}</p>
   {total === 0 && <p class="vazio">Sem cupons ou ofertas ativos do {loja.nome} neste momento. Confira a <a href="/curadoria/">curadoria do dia</a>.</p>}
   {cupons.length > 0 && (<><h2>Cupons ativos</h2><ul class="grid">{cupons.map((c) => <CupomCard cupom={c} />)}</ul></>)}
-  {ofertas.length > 0 && (<><h2>Produtos em promoção</h2><ul class="grid">{ofertas.map((o) => <OfertaCard oferta={o} />)}</ul></>)}
+  {ofertas.length > 0 && (<><h2>Produtos em promoção</h2><ul class="grid">{ofertas.map((o, i) => <OfertaCard oferta={o} eager={cupons.length === 0 && i < 2} />)}</ul></>)}
 </Base>
