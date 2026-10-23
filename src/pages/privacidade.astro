@@ -2,12 +2,106 @@
 import Base from '../layouts/Base.astro';
 import Crumbs from '../components/Crumbs.astro';
 import { SITE } from '../data/site';
-
 ---
-<Base title="Política de privacidade" description="Como o Cupons.blog trata dados de navegação, cookies e links de afiliado." path="/privacidade/" noindex={true}>
+<Base
+  title="Política de privacidade"
+  description="Como o Cupons.blog trata dados de navegação, links de afiliado e mensagens enviadas por e-mail, conforme a LGPD (Lei 13.709/2018)."
+  path="/privacidade/"
+>
   <Crumbs items={[{ nome: 'Início', href: '/' }, { nome: 'Política de privacidade' }]} />
   <h1>Política de privacidade</h1>
+  <p class="meta">Última atualização: 23 de outubro de 2026.</p>
   <div class="prose">
-    <p><strong>[CONFIRMAR]</strong> Esta página aguarda revisão final antes de ser indexada. Defina quais ferramentas de análise e anúncios o site usará (GA4, AdSense) e descreva cookies e base legal (LGPD).</p>
+    <h2>Resumo</h2>
+    <ul>
+      <li>Você não precisa se cadastrar para usar o site.</li>
+      <li>Hoje o site não usa cookies próprios, ferramentas de análise nem anúncios.</li>
+      <li>Não vendemos dados pessoais.</li>
+      <li>Ao clicar em um link de afiliado, você sai do Cupons.blog e passa a seguir as regras da loja.</li>
+    </ul>
+
+    <h2>Quem somos</h2>
+    <p>
+      O Cupons.blog (cupons.blog) publica uma curadoria diária de cupons e ofertas do Mercado Livre, da Amazon e da Shopee.
+      Para falar sobre esta política ou sobre seus dados, escreva para
+      {SITE.contactEmail ? <a href={`mailto:${SITE.contactEmail}`}>{SITE.contactEmail}</a> : 'o e-mail da página de contato'}.
+    </p>
+
+    <h2>Quais dados tratamos e por quê</h2>
+    <ul>
+      <li>
+        <strong>Registros de acesso:</strong> endereço IP, data e hora, páginas acessadas e tipo de navegador. Eles são gerados
+        pelo nosso provedor de hospedagem para manter o site funcionando e seguro. Base legal: legítimo interesse
+        (LGPD, art. 7º, IX).
+      </li>
+      <li>
+        <strong>Mensagens por e-mail:</strong> seu nome, seu endereço de e-mail e o conteúdo da mensagem, se você nos escrever.
+        Usamos só para responder. Base legal: atender a uma solicitação sua (art. 7º, V).
+      </li>
+    </ul>
+    <p>Não pedimos CPF, endereço, dados de pagamento nem qualquer dado sensível.</p>
+
+    <h2>Cookies</h2>
+    <p>
+      O Cupons.blog não define cookies próprios. Ao clicar em um link para uma loja, o site da loja pode gravar cookies
+      no seu navegador, inclusive para registrar que a visita veio do nosso link (é assim que a comissão é atribuída).
+      Esses cookies seguem a política de cada loja. Você pode bloqueá-los ou apagá-los nas configurações do navegador.
+    </p>
+
+    <h2>Links de afiliado e conteúdo de terceiros</h2>
+    <ul>
+      <li>
+        Participamos de programas de afiliados da Amazon, do Mercado Livre e da Shopee. Se você comprar pelos nossos links,
+        podemos receber uma comissão, sem custo extra para você. Veja a <a href="/divulgacao-de-afiliados/">divulgação de afiliados</a>.
+      </li>
+      <li>Não recebemos seus dados de compra, de cadastro ou de pagamento. Essas informações ficam com a loja.</li>
+      <li>
+        As fotos dos produtos são carregadas dos servidores das próprias lojas. Por isso, essas lojas podem ver seu
+        endereço IP quando você abre uma página com produtos.
+      </li>
+      <li>
+        Os links para o grupo de WhatsApp e para o Instagram só enviam dados a essas plataformas se você clicar neles.
+        Cada uma tem sua própria política de privacidade.
+      </li>
+    </ul>
+
+    <h2>Com quem compartilhamos</h2>
+    <p>
+      Não vendemos nem alugamos dados pessoais. Os registros de acesso ficam com nosso provedor de hospedagem, que atua
+      para manter o site no ar. Podemos informar dados a autoridades quando a lei exigir.
+    </p>
+
+    <h2>Por quanto tempo guardamos</h2>
+    <p>
+      Registros de acesso ficam pelo prazo definido pelo provedor de hospedagem. Mensagens por e-mail ficam pelo tempo
+      necessário para atender ao seu pedido e para cumprir obrigações legais. Depois disso, apagamos.
+    </p>
+
+    <h2>Seus direitos</h2>
+    <p>Pela LGPD (art. 18), você pode pedir:</p>
+    <ul>
+      <li>confirmação de que tratamos seus dados e acesso a eles;</li>
+      <li>correção de dados incompletos ou desatualizados;</li>
+      <li>anonimização, bloqueio ou eliminação de dados desnecessários ou tratados sem base legal;</li>
+      <li>informação sobre com quem compartilhamos seus dados;</li>
+      <li>revogação de consentimento, quando o tratamento depender dele.</li>
+    </ul>
+    <p>
+      Envie o pedido para
+      {SITE.contactEmail ? <a href={`mailto:${SITE.contactEmail}`}>{SITE.contactEmail}</a> : 'o e-mail da página de contato'}.
+      Você também pode reclamar à Autoridade Nacional de Proteção de Dados (ANPD).
+    </p>
+
+    <h2>Segurança</h2>
+    <p>O site usa HTTPS, e a conexão entre seu navegador e o Cupons.blog é criptografada.</p>
+
+    <h2>Crianças e adolescentes</h2>
+    <p>O site não é voltado a menores de 18 anos, e não coletamos dados de crianças de propósito.</p>
+
+    <h2>Mudanças nesta política</h2>
+    <p>
+      Se passarmos a usar ferramentas de análise, publicidade ou outros cookies, atualizaremos esta página antes e
+      mudaremos a data acima.
+    </p>
   </div>
 </Base>

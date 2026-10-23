@@ -9,7 +9,7 @@ export const SITE = {
   // Tag de afiliado Amazon Associates (já usada nos outros sites).
   amazonTag: 'cleudivanrica-20',
   // E-mail público de contato. [CONFIRMAR] — enquanto null, a página /contato/ fica noindex.
-  contactEmail: null as string | null,
+  contactEmail: 'contato@cupons.blog' as string | null,
   // Quantos dias uma edição continua alimentando as páginas de loja (preço muda rápido).
   ofertaValidadeDias: 3,
   // Cupom sem validade informada pela loja: some depois de N dias da edição (0 = só no dia).

@@ -18,7 +18,8 @@ export const GET: APIRoute = async () => {
   for (const e of edicoes.filter(edicaoIndexavel)) {
     urls.push({ loc: `/curadoria/${e.id}/`, lastmod: isoDia(e.data.atualizadoEm ?? e.data.publicadoEm) });
   }
-  urls.push({ loc: '/como-funciona/' }, { loc: '/divulgacao-de-afiliados/' });
+  urls.push({ loc: '/como-funciona/' }, { loc: '/divulgacao-de-afiliados/' }, { loc: '/privacidade/' });
+  if (SITE.contactEmail) urls.push({ loc: '/contato/' });
 
   const xml =
     `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +

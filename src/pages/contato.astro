@@ -2,12 +2,27 @@
 import Base from '../layouts/Base.astro';
 import Crumbs from '../components/Crumbs.astro';
 import { SITE } from '../data/site';
-
 ---
-<Base title="Contato" description="Fale com a equipe do Cupons.blog." path="/contato/" noindex={SITE.contactEmail === null}>
+<Base
+  title="Contato"
+  description="Fale com o Cupons.blog: dúvidas, correção de preço ou cupom, pedidos sobre seus dados e sugestões de pauta."
+  path="/contato/"
+  noindex={SITE.contactEmail === null}
+>
   <Crumbs items={[{ nome: 'Início', href: '/' }, { nome: 'Contato' }]} />
   <h1>Contato</h1>
   <div class="prose">
-    {SITE.contactEmail ? <p>E-mail: <a href={`mailto:${SITE.contactEmail}`}>{SITE.contactEmail}</a></p> : <p><strong>[CONFIRMAR]</strong> Defina o e-mail público em <code>src/data/site.ts</code>.</p>}
+    {SITE.contactEmail && (
+      <p>E-mail: <a href={`mailto:${SITE.contactEmail}`}>{SITE.contactEmail}</a></p>
+    )}
+    <h2>Quando falar com a gente</h2>
+    <ul>
+      <li>Encontrou um preço, cupom ou link que mudou ou saiu do ar.</li>
+      <li>Quer sugerir uma loja, um produto ou um cupom.</li>
+      <li>Quer exercer seus direitos sobre dados pessoais, como acesso ou exclusão. Veja a <a href="/privacidade/">política de privacidade</a>.</li>
+    </ul>
+    <h2>Antes de escrever</h2>
+    <p>Não vendemos produtos nem temos acesso a pedidos. Dúvidas sobre compra, entrega, troca ou reembolso devem ir direto à loja onde você comprou.</p>
+    <p>Conheça também <a href="/como-funciona/">como funciona a curadoria</a> e a <a href="/divulgacao-de-afiliados/">divulgação de afiliados</a>.</p>
   </div>
 </Base>
