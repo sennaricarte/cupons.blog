@@ -63,6 +63,9 @@ if (d.faq.length) {
   <Crumbs items={[{ nome: 'Início', href: '/' }, { nome: 'Curadoria do dia', href: '/curadoria/' }, { nome: dataLonga(e.id) }]} />
   <h1>{d.titulo}</h1>
   <p class="lede">{d.resumo}</p>
+  {d.destaque && (
+    <aside class="destaque"><strong>Destaque do dia</strong><p>{d.destaque}</p></aside>
+  )}
   {antiga && (
     <p class="vazio">Esta edição é de {dataLonga(e.id)}. Preços e cupons podem ter expirado. <a href="/curadoria/">Veja a curadoria mais recente</a>.</p>
   )}

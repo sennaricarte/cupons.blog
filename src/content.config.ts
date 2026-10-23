@@ -63,6 +63,8 @@ const edicoes = defineCollection({
     titulo: z.string().min(10),
     // Título para o Google (<= 60 caracteres). Se omitido, usa `titulo`.
     tituloSeo: z.string().max(60).optional(),
+    // Texto editorial curto e ORIGINAL do dia (2-4 frases, só fatos dos itens da edição).
+    destaque: z.string().min(40).max(500).optional(),
     resumo: z.string().min(40).max(200),
     publicadoEm: z.coerce.date(),
     atualizadoEm: z.coerce.date().optional(),

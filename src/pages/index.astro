@@ -48,6 +48,9 @@ const ld = total
           Última curadoria: <a href={`/curadoria/${hoje.id}/`}>{dataLonga(hoje.id)}</a>
         </p>
       )}
+      {hoje?.data.destaque && (
+        <aside class="destaque"><strong>Destaque do dia</strong><p>{hoje.data.destaque}</p></aside>
+      )}
       {destaqueCupons.length > 0 && (
         <>
           <h2>Cupons ativos agora</h2>

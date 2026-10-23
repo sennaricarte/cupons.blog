@@ -43,6 +43,8 @@ h3{font-size:1.05rem;margin:0 0 .3em}
 .btn{display:inline-block;text-align:center;background:var(--brand);color:var(--brand-ink);font-weight:700;text-decoration:none;padding:11px 16px;border-radius:10px;margin-top:auto}
 .btn:hover{filter:brightness(1.08)}
 .codigo{font:700 1rem ui-monospace,SFMono-Regular,Menlo,monospace;background:var(--bg);border:1.5px dashed var(--brand);border-radius:8px;padding:8px 10px;text-align:center;user-select:all}
+.destaque{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:var(--radius);padding:14px 16px;margin:16px 0;max-width:68ch}
+.destaque p{margin:.35em 0 0}
 .vazio{background:var(--surface);border:1px dashed var(--line);border-radius:var(--radius);padding:24px;color:var(--muted)}
 .chips{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 0;padding:0;list-style:none}
 .chips a{display:inline-block;border:1px solid var(--line);background:var(--surface);color:var(--ink);text-decoration:none;font-weight:600;padding:8px 14px;border-radius:99px}

@@ -4,6 +4,7 @@
 # REGRA DE OURO: só publique cupom/preço que você viu na página da loja HOJE. Nada de estimativa.
 titulo: "Cupons e ofertas de hoje: [destaque real do dia]"
 tituloSeo: "Cupons e ofertas de hoje (DD/MM)"   # opcional, até 60 caracteres (aparece no Google)
+destaque: "2 a 4 frases sobre o que vale hoje, só com fatos dos itens abaixo (maior desconto, condições do cupom, validade)."
 resumo: "Resumo de 1–2 frases (40–200 caracteres) citando o que há de melhor hoje, só com fatos conferidos."
 publicadoEm: 2026-01-01
 cupons:
