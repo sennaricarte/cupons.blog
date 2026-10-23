@@ -9,7 +9,7 @@ Tempo-alvo: 15 a 30 minutos. Regra de ouro: **só publique o que você viu na p�
 | Preço atual | Página do anúncio | Se exigir Pix ou cupom, escreva isso na observação |
 | Preço anterior ("de") | Página do anúncio | Só se a loja mostrar. O site calcula o % truncado, igual ao Mercado Livre; se ainda divergir, omita e cite o % no texto |
 | Link de afiliado | Botão **Compartilhar** (ML) / SiteStripe (Amazon) / gerador da Shopee | Link curto da própria plataforma |
-| Imagem | Botão direito na foto → **Copiar endereço da imagem** | Só Mercado Livre por enquanto |
+| Imagem | Mercado Livre: botão direito na foto → **Copiar endereço da imagem**. Amazon: prefira o SiteStripe (**Imagem**) | Sempre só o link da imagem, nunca baixar ou hospedar |
 | Categoria | Sua escolha | Curta e genérica (ex.: Casa e lavanderia) |
 | Cupom (se houver) | Página da campanha | Código exato (se houver), compra mínima, limite e validade que a loja informa |
 | Validade do cupom | Página do cupom | Sem `validadeAte`, o cupom some do site 1 dia depois da edição (`cupomSemValidadeDias`) |
@@ -17,7 +17,7 @@ Tempo-alvo: 15 a 30 minutos. Regra de ouro: **só publique o que você viu na p�
 ## 2. Não publicar
 - % **Ganhos** / comissão: é dado interno.
 - Preço, desconto, prazo ou estoque que você não viu na loja.
-- Imagem da Amazon hospedada ou copiada (use SiteStripe ou API oficial).
+- Imagem da Amazon baixada e hospedada no site. Use apenas link; o SiteStripe é o caminho mais seguro com as regras do Associates.
 - Produto com título incompleto ou link de outra loja.
 
 ## 3. Montar
