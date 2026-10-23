@@ -33,7 +33,7 @@ export const LOJAS: Record<
   'mercado-livre': {
     nome: 'Mercado Livre',
     hosts: ['mercadolivre.com.br', 'mercadolivre.com', 'meli.la'],
-    cor: '#b38600',
+    cor: '#8f6a00',
     descricao: 'Cupons e ofertas do Mercado Livre selecionados hoje.',
   },
   amazon: {
